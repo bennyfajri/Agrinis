@@ -91,4 +91,8 @@ dependencies {
     // TESTING
     testImplementation(Deps.Testing.jUnit)
     testImplementation(Deps.Testing.mockito)
+
+    //Paging
+    implementation(Deps.paging)
+    implementation(Deps.Room.roomPaging)
 }

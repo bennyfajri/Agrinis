@@ -66,9 +66,12 @@ object Deps {
     val chucker by lazy { "com.github.chuckerteam.chucker:library:${Versions.chucker}" }
     val chuckerRelease by lazy { "com.github.chuckerteam.chucker:library-no-op:${Versions.chucker}" }
 
+    val paging by lazy { "androidx.paging:paging-runtime-ktx:${Versions.paging}" }
+
     object Room {
         val ktx by lazy { "androidx.room:room-ktx:${Versions.roomVersion}" }
         val runtime by lazy {  "androidx.room:room-runtime:${Versions.roomVersion}" }
+        val roomPaging by lazy {  "androidx.room:room-paging:${Versions.roomPaging}" }
     }
 
     object KotlinX {

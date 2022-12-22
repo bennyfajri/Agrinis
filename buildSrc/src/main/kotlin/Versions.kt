@@ -70,6 +70,9 @@ object Versions {
     const val mockito = "2.21.0"
     const val chucker = "3.5.2"
 
+    const val paging = "3.1.1"
+    const val roomPaging = "2.5.0-rc01"
+
     object KotlinX {
         val serialization by lazy {  "1.4.1" }
         val kotlinCoroutines by lazy { "1.6.4" }
