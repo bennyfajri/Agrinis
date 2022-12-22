@@ -111,6 +111,7 @@ object Deps {
         val retrofitMoshi by lazy { "com.squareup.retrofit2:converter-moshi:${Versions.squareupRetrofit}" }
 
         val moshi by lazy { "com.squareup.moshi:moshi-kotlin:${Versions.moshi}" }
+        val retrofitGson by lazy { "com.squareup.retrofit2:converter-gson:${Versions.squareupRetrofit}" }
     }
 
     object Firebase {

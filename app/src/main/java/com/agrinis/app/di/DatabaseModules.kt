@@ -2,7 +2,7 @@ package com.agrinis.app.di
 
 import android.app.Application
 import androidx.room.Room
-import com.agrinis.app.data.persistence.AppDatabase
+import com.agrinis.app.di.persistence.AppDatabase
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 

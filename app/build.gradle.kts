@@ -1,4 +1,6 @@
-
+import java.io.FileInputStream
+import java.io.FileNotFoundException
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -8,9 +10,9 @@ plugins {
 }
 
 // TODO: Buat sebuah file dengan nama apikey.properties pada project root yang berisi NEWS_API_KEY
-//val apikeyPropertiesFile by lazy { rootProject.file("apikey.properties") }
-//val apikeyProperties by lazy { Properties() }
-//apikeyProperties.load(FileInputStream(apikeyPropertiesFile))
+val apikeyPropertiesFile by lazy { rootProject.file("apikey.properties") }
+val apikeyProperties by lazy { Properties() }
+apikeyProperties.load(FileInputStream(apikeyPropertiesFile))
 
 android {
     compileSdk = AppInfo.compileSdkVersion
@@ -25,6 +27,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // TODO: define BASE_URL and NEWS_API_KEY here
+        buildConfigField("String", "NEWS_API_KEY", apikeyProperties.getProperty("NEWS_API_KEY"))
     }
 
     buildTypes {
@@ -65,6 +68,7 @@ dependencies {
     implementation(Deps.SquareUp.retrofit)
     implementation(Deps.SquareUp.retrofitMoshi)
     implementation(Deps.SquareUp.moshi)
+    implementation(Deps.SquareUp.retrofitGson)
 
     // KOIN
     implementation(Deps.Koin.core)

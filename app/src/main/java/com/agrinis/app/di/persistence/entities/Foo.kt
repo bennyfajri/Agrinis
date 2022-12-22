@@ -1,4 +1,4 @@
-package com.agrinis.app.data.persistence.entities
+package com.agrinis.app.di.persistence.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

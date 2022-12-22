@@ -1,8 +1,8 @@
-package com.agrinis.app.data.persistence
+package com.agrinis.app.di.persistence
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.agrinis.app.data.persistence.entities.Foo
+import com.agrinis.app.di.persistence.entities.Foo
 
 /**
  * @author Created by Arca International on 21/11/2022

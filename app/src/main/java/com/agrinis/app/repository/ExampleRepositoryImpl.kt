@@ -1,6 +1,6 @@
 package com.agrinis.app.repository
 
-import com.agrinis.app.data.persistence.dao.FooDao
+import com.agrinis.app.di.persistence.dao.FooDao
 import com.agrinis.app.network.ApiService
 import com.agrinis.app.network.request
 import kotlinx.coroutines.flow.flow
