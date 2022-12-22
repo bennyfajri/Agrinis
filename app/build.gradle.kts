@@ -1,5 +1,4 @@
 import java.io.FileInputStream
-import java.io.FileNotFoundException
 import java.util.Properties
 
 plugins {
@@ -28,6 +27,7 @@ android {
 
         // TODO: define BASE_URL and NEWS_API_KEY here
         buildConfigField("String", "NEWS_API_KEY", apikeyProperties.getProperty("NEWS_API_KEY"))
+        buildConfigField("String", "BASE_URL", apikeyProperties.getProperty("BASE_URL"))
     }
 
     buildTypes {
