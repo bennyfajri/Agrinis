@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Agrinis</string>
+    <string name="title_home">Article</string>
+    <string name="title_category">Category</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

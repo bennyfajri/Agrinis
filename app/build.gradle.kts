@@ -78,6 +78,8 @@ dependencies {
     // LIFECYCLE
     implementation(Deps.lifecycleLiveData)
     implementation(Deps.lifecycleViewModel)
+    implementation(Deps.navigationFragmentKtx)
+    implementation(Deps.navigationUiKtx)
     testImplementation(Deps.archCoreTesting)
     implementation(Deps.activityKtx)
     implementation(Deps.fragmentKtx)
