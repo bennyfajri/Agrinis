@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
  * @author Created by Arca International on 21/11/2022
  */
 val networkModules = module {
-//    val baseUrl = BuildConfig.BASE_URL
+    val baseUrl = BuildConfig.BASE_URL
 
     singleOf(::NoConnectionInterceptor)
     singleOf(::provideHttpLoggingInterceptor)

@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
 }
 
 // TODO: Buat sebuah file dengan nama apikey.properties pada project root yang berisi NEWS_API_KEY
@@ -78,6 +79,8 @@ dependencies {
     implementation(Deps.lifecycleLiveData)
     implementation(Deps.lifecycleViewModel)
     testImplementation(Deps.archCoreTesting)
+    implementation(Deps.activityKtx)
+    implementation(Deps.fragmentKtx)
 
     // KOTLIN COROUTINES
     implementation(Deps.KotlinX.coroutineCore)
@@ -95,4 +98,11 @@ dependencies {
     //Paging
     implementation(Deps.paging)
     implementation(Deps.Room.roomPaging)
+
+    //Hilt
+    implementation(Deps.DaggerHilt.hilt)
+    kapt(Kapt.hiltCompiler)
+
+    //Glide
+    implementation(Deps.glide)
 }

@@ -14,6 +14,7 @@ object Versions {
     const val firebase = "2.0.0"
     const val firebaseCrashlytics = "2.7.1"
     const val firebasePerformance = "1.4.1"
+    const val hilt = "2.42"
 
     const val timber = "4.7.1"
     const val appCompat = "1.5.1"
@@ -22,6 +23,7 @@ object Versions {
     const val legacySupport = "1.0.0"
     const val workManagerKtxVersion = "2.7.1"
     const val fragmentKtxVersion = "1.4.1"
+    const val activityKtxVersion = "1.6.1"
     const val flexBox = "3.0.0"
     const val browserHelper = "2.4.0"
     const val gson = "2.9.1"
@@ -71,7 +73,6 @@ object Versions {
     const val chucker = "3.5.2"
 
     const val paging = "3.1.1"
-    const val roomPaging = "2.5.0-rc01"
 
     object KotlinX {
         val serialization by lazy {  "1.4.1" }

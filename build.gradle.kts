@@ -2,6 +2,7 @@
 buildscript {
     dependencies {
         classpath(BuildPlugins.serialization)
+        classpath(BuildPlugins.hilt)
     }
 }
 

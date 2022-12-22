@@ -9,6 +9,7 @@ object BuildPlugins {
     val android by lazy { "com.android.tools.build:gradle:${Versions.gradlePlugin}" }
     val kotlin by lazy { "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}" }
     val serialization by lazy { "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}" }
+    val hilt by lazy { "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}" }
 }
 
 /**
@@ -30,6 +31,7 @@ object Deps {
     val fragmentKtx by lazy { "androidx.fragment:fragment-ktx:${Versions.fragmentKtxVersion}" }
     val navigationFragmentKtx by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.navigationUi}" }
     val navigationUiKtx by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.navigationUi}" }
+    val activityKtx by lazy { "androidx.activity:activity-ktx:${Versions.activityKtxVersion}" }
 
     val glide by lazy { "com.github.bumptech.glide:glide:${Versions.glide}" }
     val glideOkhttp by lazy { "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}" }
@@ -71,13 +73,17 @@ object Deps {
     object Room {
         val ktx by lazy { "androidx.room:room-ktx:${Versions.roomVersion}" }
         val runtime by lazy {  "androidx.room:room-runtime:${Versions.roomVersion}" }
-        val roomPaging by lazy {  "androidx.room:room-paging:${Versions.roomPaging}" }
+        val roomPaging by lazy {  "androidx.room:room-paging:${Versions.roomVersion}" }
     }
 
     object KotlinX {
         val serialization by lazy { "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.KotlinX.serialization}" }
         val coroutineCore by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KotlinX.kotlinCoroutines}" }
         val coroutineAndroid by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KotlinX.kotlinCoroutines}" }
+    }
+
+    object DaggerHilt{
+        val hilt by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
     }
 
     object Ktor {
@@ -157,6 +163,7 @@ object Deps {
 object Kapt {
     val glide by lazy { "com.github.bumptech.glide:compiler:${Versions.glide}" }
     val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.roomVersion}" }
+    val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hilt}" }
 }
 
 /**
