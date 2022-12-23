@@ -3,10 +3,14 @@ package com.agrinis.app.di
 import android.content.Context
 import androidx.room.Room
 import com.agrinis.app.BuildConfig
+import com.agrinis.app.data.models.Category
+import com.agrinis.app.data.models.ObjectCategory
 import com.agrinis.app.di.persistence.AppDatabase
 import com.agrinis.app.network.ApiService
 import com.agrinis.app.repository.article.ArticleRepository
 import com.agrinis.app.repository.article.ArticleRepositoryImpl
+import com.agrinis.app.repository.category.CategoryRepository
+import com.agrinis.app.repository.category.CategoryRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,6 +59,12 @@ object AppModules {
     @Singleton
     fun provideArticleRepository(api: ApiService, db: AppDatabase): ArticleRepository{
         return ArticleRepositoryImpl(api, db)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCategoryRepository(category: ObjectCategory): CategoryRepository{
+        return CategoryRepositoryImpl(category)
     }
     
     @Provides

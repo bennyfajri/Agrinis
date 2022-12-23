@@ -7,4 +7,5 @@
     <string name="author">Author</string>
     <string name="search_">Type to search something</string>
     <string name="retry">Retry</string>
+    <string name="icon_">Icon %1$s</string>
 </resources>
