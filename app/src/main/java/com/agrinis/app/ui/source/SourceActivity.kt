@@ -24,6 +24,7 @@ class SourceActivity : AppCompatActivity() {
 
     companion object {
         const val CATEGORY = "Category"
+        const val SEARCH_ARTICLE = "SearchArticle"
     }
 
     private val binding by viewBinding(ActivitySourceBinding::inflate)
@@ -40,6 +41,7 @@ class SourceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        setSupportActionBar(binding.toolbar.materialToolbar)
         mSourceAdapter = SourceAdapter {
             showNewsBySources(it)
         }

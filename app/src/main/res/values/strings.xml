@@ -10,4 +10,5 @@
     <string name="icon_">Icon %1$s</string>
     <string name="forward">Forward</string>
     <string name="news_sources">News Sources</string>
+    <string name="my_news">My News</string>
 </resources>
