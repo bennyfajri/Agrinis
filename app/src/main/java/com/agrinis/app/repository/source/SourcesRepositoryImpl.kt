@@ -1,9 +1,14 @@
 package com.agrinis.app.repository.source
 
 import android.util.Log
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.agrinis.app.data.models.response.ServerResponse
+import com.agrinis.app.di.persistence.entities.Article
 import com.agrinis.app.network.ApiService
 import com.agrinis.app.network.Result
+import com.agrinis.app.repository.article.ArticlePaging
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -30,4 +35,15 @@ class SourcesRepositoryImpl @Inject constructor(
             Log.d(TAG, "getSources: ${it.message}")
             emit(Result.Error(it.message.toString()))
         }
+
+    override fun getArticleBySource(source: String?): Flow<PagingData<Article>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                ArticlePaging(ArticlePaging.BY_SOURCE, source, apiService)
+            }
+        ).flow
+    }
 }

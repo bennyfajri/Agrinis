@@ -10,8 +10,11 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.agrinis.app.R
+import com.agrinis.app.data.models.response.Sources
 import com.agrinis.app.databinding.ActivitySourceBinding
 import com.agrinis.app.repository.source.SourceAdapter
+import com.agrinis.app.ui.article.ArticleAdapter
+import com.agrinis.app.ui.article.LoadingStateAdapter
 import com.agrinis.app.util.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +29,7 @@ class SourceActivity : AppCompatActivity() {
     private val binding by viewBinding(ActivitySourceBinding::inflate)
     private val viewModel: SourceViewModel by viewModels()
     private lateinit var mSourceAdapter: SourceAdapter
+    private lateinit var mArticleAdapter: ArticleAdapter
 
     private lateinit var sheetLayout: ConstraintLayout
     private lateinit var rvSource: RecyclerView
@@ -37,12 +41,33 @@ class SourceActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         mSourceAdapter = SourceAdapter {
-
+            showNewsBySources(it)
         }
+        mArticleAdapter = ArticleAdapter()
         val category = intent.getStringExtra(CATEGORY).toString()
         initializeBottomSheet()
         setSourceByCategory(category)
         setupSourceRecycler()
+        setupNewsRecycler()
+    }
+
+    private fun setupNewsRecycler() {
+        binding.rvNews.apply {
+            layoutManager = LinearLayoutManager(this@SourceActivity)
+            setHasFixedSize(true)
+            adapter = mArticleAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    mArticleAdapter.retry()
+                }
+            )
+        }
+    }
+
+    private fun showNewsBySources(sources: Sources) {
+        viewModel.getArticleBySource(sources.id).observe(this@SourceActivity){
+            mArticleAdapter.submitData(lifecycle, it)
+            sheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
     }
 
     private fun setupSourceRecycler() {

@@ -11,4 +11,5 @@ class SourceViewModel @Inject constructor(
     private val repository: SourceRepository
 ) : ViewModel() {
     fun getSource(category: String)= repository.getSource(category).asLiveData()
+    fun getArticleBySource(source: String) = repository.getArticleBySource(source).asLiveData()
 }
