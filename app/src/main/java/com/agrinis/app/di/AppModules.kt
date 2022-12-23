@@ -5,6 +5,8 @@ import androidx.room.Room
 import com.agrinis.app.BuildConfig
 import com.agrinis.app.di.persistence.AppDatabase
 import com.agrinis.app.network.ApiService
+import com.agrinis.app.repository.article.ArticleRepository
+import com.agrinis.app.repository.article.ArticleRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,6 +49,12 @@ object AppModules {
     @Singleton
     fun providesApi(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideArticleRepository(api: ApiService, db: AppDatabase): ArticleRepository{
+        return ArticleRepositoryImpl(api, db)
     }
     
     @Provides

@@ -8,7 +8,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.agrinis.app.R
 import com.agrinis.app.databinding.ActivityMainBinding
 import com.agrinis.app.util.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding by viewBinding(ActivityMainBinding::inflate)

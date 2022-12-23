@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 data class Article(
     @PrimaryKey(autoGenerate = true)
     @field:SerializedName("id")
-    val id: Int? = 0,
+    val id: Int? = null,
 
     @field:SerializedName("author")
     val author: String,

@@ -1,5 +1,6 @@
 package com.agrinis.app.repository.article
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -12,12 +13,17 @@ import com.agrinis.app.network.ApiService
 
 @ExperimentalPagingApi
 class ArticleRemoteMediator(
+    private val type: String,
+    private val query: String? = null,
     private val apiService: ApiService,
     private val db: AppDatabase
 ) : RemoteMediator<Int, Article>() {
 
     companion object {
         const val INITIAL_PAGE_INDEX = 1
+        const val TOP_NEWS = "TOP_NEWS"
+        const val SEARCH_NEWS = "SEARCH_NEWS"
+        const val BY_SOURCE = "BY_SOURCE_NEWS"
     }
 
     override suspend fun initialize(): InitializeAction {
@@ -50,10 +56,38 @@ class ArticleRemoteMediator(
         }
 
         return try {
-            val responseData = apiService.getArticles(
-                page = page,
-                size = state.config.pageSize
-            ).articles
+            val responseData = when(type){
+                TOP_NEWS -> {
+                    apiService.getTopNews(
+                        query as String,
+                        page = page,
+                        size = state.config.pageSize
+                    ).articles
+                }
+                SEARCH_NEWS -> {
+                    apiService.getArticles(
+                        query,
+                        page = page,
+                        size = state.config.pageSize
+                    ).articles
+                }
+                BY_SOURCE -> {
+                    apiService.getArticleBySource(
+                        query as String,
+                        page = page,
+                        size = state.config.pageSize
+                    ).articles
+                }
+                else -> {
+                    apiService.getTopNews(
+                        query as String,
+                        page = page,
+                        size = state.config.pageSize
+                    ).articles
+                }
+            }
+
+            Log.d("Response:::", "load: $responseData")
 
             val endOfPaginationReached = responseData?.isEmpty()
 
