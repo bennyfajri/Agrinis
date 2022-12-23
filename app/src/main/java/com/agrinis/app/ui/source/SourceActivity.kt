@@ -1,10 +1,12 @@
 package com.agrinis.app.ui.source
 
+import android.net.Uri
 import android.os.Bundle
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.agrinis.app.R
 import com.agrinis.app.data.models.response.Sources
 import com.agrinis.app.databinding.ActivitySourceBinding
+import com.agrinis.app.di.persistence.entities.Article
 import com.agrinis.app.repository.source.SourceAdapter
 import com.agrinis.app.ui.article.ArticleAdapter
 import com.agrinis.app.ui.article.LoadingStateAdapter
@@ -59,7 +62,9 @@ class SourceActivity : AppCompatActivity() {
             setupSourceRecycler()
         }
 
-        mArticleAdapter = ArticleAdapter()
+        mArticleAdapter = ArticleAdapter{
+            showDetailArticle(it)
+        }
 
         setupNewsRecycler()
         binding.toolbar.etSearch.doAfterTextChanged {
@@ -70,6 +75,12 @@ class SourceActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showDetailArticle(article: Article) {
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(this@SourceActivity, Uri.parse(article.url))
     }
 
     private fun searchArticle(query: String) {

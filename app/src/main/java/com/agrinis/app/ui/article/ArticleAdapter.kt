@@ -11,7 +11,9 @@ import com.agrinis.app.databinding.ItemNewsBinding
 import com.agrinis.app.di.persistence.entities.Article
 import com.bumptech.glide.Glide
 
-class ArticleAdapter : PagingDataAdapter<Article, ArticleAdapter.ViewHolder>(DIFF_CALLBACK) {
+class ArticleAdapter(
+    private val onClick: (Article) -> Unit
+) : PagingDataAdapter<Article, ArticleAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,7 +36,7 @@ class ArticleAdapter : PagingDataAdapter<Article, ArticleAdapter.ViewHolder>(DIF
                     .load(data.urlToImage)
                     .into(icNews)
                 itemView.setOnClickListener {
-                    //onclick
+                    onClick(data)
                 }
             }
         }

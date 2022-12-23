@@ -1,26 +1,23 @@
 package com.agrinis.app.ui.article
 
-import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.text.InputType
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.agrinis.app.R
 import com.agrinis.app.databinding.FragmentArticleBinding
-import com.agrinis.app.ui.source.SourceActivity
-import com.agrinis.app.util.viewBinding
+import com.agrinis.app.di.persistence.entities.Article
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class ArticleFragment : Fragment() {
@@ -44,7 +41,9 @@ class ArticleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if(activity != null) {
-            mAdapter = ArticleAdapter()
+            mAdapter = ArticleAdapter {
+                showDetailArticle(it)
+            }
             setupArticleRecycler()
             getTopIndonesianArticle()
             binding?.toolbar?.etSearch?.doAfterTextChanged {
@@ -57,6 +56,12 @@ class ArticleFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showDetailArticle(article: Article) {
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        customTabsIntent.launchUrl(requireContext(), Uri.parse(article.url))
     }
 
     private fun searchArticle(query: String) {
