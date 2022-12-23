@@ -46,4 +46,15 @@ class SourcesRepositoryImpl @Inject constructor(
             }
         ).flow
     }
+
+    override fun getArticle(query: String?): Flow<PagingData<Article>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                ArticlePaging(ArticlePaging.SEARCH_NEWS, query, apiService)
+            }
+        ).flow
+    }
 }

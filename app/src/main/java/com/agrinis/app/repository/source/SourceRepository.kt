@@ -9,4 +9,5 @@ import kotlinx.coroutines.flow.Flow
 interface SourceRepository {
     fun getSource(category: String): Flow<Result<ServerResponse>>
     fun getArticleBySource(source: String? = null): Flow<PagingData<Article>>
+    fun getArticle(query: String? = null): Flow<PagingData<Article>>
 }

@@ -2,6 +2,7 @@ package com.agrinis.app.ui.category
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.agrinis.app.R
 import com.agrinis.app.databinding.FragmentCategoryBinding
 import com.agrinis.app.ui.source.SourceActivity
 import com.agrinis.app.ui.source.SourceActivity.Companion.CATEGORY
+import com.agrinis.app.ui.source.SourceActivity.Companion.SEARCH_ARTICLE
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -44,6 +46,19 @@ class CategoryFragment : Fragment() {
                     startActivity(it)
                 }
             }
+
+            binding?.toolbar?.apply {
+                etSearch.isFocusable = false
+                ilSearch.isFocusable = false
+                etSearch.inputType = InputType.TYPE_NULL
+                etSearch.setOnClickListener {
+                    Intent(requireContext(), SourceActivity::class.java).also { intent ->
+                        intent.putExtra(SEARCH_ARTICLE, SEARCH_ARTICLE)
+                        startActivity(intent)
+                    }
+                }
+            }
+
 
             mAdapter.submitList(viewModel.getCategory())
             binding?.rvCategory?.apply {

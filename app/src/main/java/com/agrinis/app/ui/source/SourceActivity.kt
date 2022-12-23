@@ -7,6 +7,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.agrinis.app.R
@@ -18,6 +20,8 @@ import com.agrinis.app.ui.article.LoadingStateAdapter
 import com.agrinis.app.util.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SourceActivity : AppCompatActivity() {
@@ -42,15 +46,37 @@ class SourceActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar.materialToolbar)
-        mSourceAdapter = SourceAdapter {
-            showNewsBySources(it)
+
+        if(intent.hasExtra(SEARCH_ARTICLE)){
+           binding.bottomSheetSource.isVisible = false
+        } else {
+            mSourceAdapter = SourceAdapter {
+                showNewsBySources(it)
+            }
+            val category = intent.getStringExtra(CATEGORY).toString()
+            initializeBottomSheet()
+            setSourceByCategory(category)
+            setupSourceRecycler()
         }
+
         mArticleAdapter = ArticleAdapter()
-        val category = intent.getStringExtra(CATEGORY).toString()
-        initializeBottomSheet()
-        setSourceByCategory(category)
-        setupSourceRecycler()
+
         setupNewsRecycler()
+        binding.toolbar.etSearch.doAfterTextChanged {
+            if(it.toString().isNotEmpty()){
+                lifecycleScope.launch {
+                    delay(600)
+                    searchArticle(it.toString())
+                }
+            }
+        }
+    }
+
+    private fun searchArticle(query: String) {
+        viewModel.getArticle(query).observe(this@SourceActivity){
+            mArticleAdapter.submitData(lifecycle, it)
+            setupNewsRecycler()
+        }
     }
 
     private fun setupNewsRecycler() {
