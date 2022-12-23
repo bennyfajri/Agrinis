@@ -1,5 +1,6 @@
 package com.agrinis.app.ui.category
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agrinis.app.R
 import com.agrinis.app.databinding.FragmentCategoryBinding
+import com.agrinis.app.ui.source.SourceActivity
+import com.agrinis.app.ui.source.SourceActivity.Companion.CATEGORY
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -33,8 +36,11 @@ class CategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            mAdapter = CategoryAdapter {
-
+            mAdapter = CategoryAdapter { category ->
+                Intent(requireContext(), SourceActivity::class.java).also {
+                    it.putExtra(CATEGORY, category)
+                    startActivity(it)
+                }
             }
 
             mAdapter.submitList(viewModel.getCategory())

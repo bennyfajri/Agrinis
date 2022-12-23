@@ -11,5 +11,8 @@ data class ServerResponse(
     val articles: List<Article>? = null,
 
     @field:SerializedName("totalResults")
-    val totalResuls: Int? = null
+    val totalResuls: Int? = null,
+
+    @field:SerializedName("sources")
+    val sources: List<Sources>? = null
 )

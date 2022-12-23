@@ -11,6 +11,8 @@ import com.agrinis.app.repository.article.ArticleRepository
 import com.agrinis.app.repository.article.ArticleRepositoryImpl
 import com.agrinis.app.repository.category.CategoryRepository
 import com.agrinis.app.repository.category.CategoryRepositoryImpl
+import com.agrinis.app.repository.source.SourceRepository
+import com.agrinis.app.repository.source.SourcesRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -65,6 +67,12 @@ object AppModules {
     @Singleton
     fun provideCategoryRepository(category: ObjectCategory): CategoryRepository{
         return CategoryRepositoryImpl(category)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSourceRepository(api: ApiService): SourceRepository{
+        return SourcesRepositoryImpl(api)
     }
     
     @Provides
